@@ -844,7 +844,11 @@ rbutton::
 
 
 
+<<<<<<< HEAD
 ;;;;;;;;;;;;;;;;;;;; alt+C，转换为alt+f4，或者ctrl+w, 关闭 ;;;;;;;;;
+=======
+;;;;;;;;;;;;;;;;;;;; alt+C ，转换为alt+f4，或者ctrl+w, 关闭 ;;;;;;;;;
+>>>>>>> refs/remotes/origin/master
 ~!c::
 AddBrowserGroup()
 IfWinActive ahk_class TablacusExplorer
@@ -860,6 +864,7 @@ else IfWinActive ahk_class WeChatMainWndForPC	;微信
 	sleep 200
 }
 else IfWinActive ahk_exe HBuilderX.exe			;HBuilderX.exe
+<<<<<<< HEAD
 	return
 else IfWinActive ahk_exe idea64.exe			;idea.exe
 	return
@@ -867,6 +872,25 @@ else IfWinActive ahk_exe QQ.exe
 	Send !c
 else  ; 其他的不管
 	sleep 200
+=======
+	Send !c
+else IfWinActive ahk_exe idea64.exe			;idea.exe
+	Send !c
+else IfWinActive ahk_exe QQ.exe
+	Send !c
+else IfWinActive ahk_exe MySQLWorkbench.exe
+	Send !c
+
+else  ; 其他的直接关闭
+{
+	WinGet,currentWinID, ID, A
+	sleep 300
+	; MsgBox %currentWinID%
+	WinClose, ahk_id %currentWinID%
+	sleep 200
+}
+sleep 200
+>>>>>>> refs/remotes/origin/master
 return
 
 
