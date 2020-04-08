@@ -47,15 +47,17 @@ RecoginzeComputer()
 
 !f2::WinMyActiveOrOpen("ahk_exe ONENOTE.EXE","OneNote")	;;;;;;;;;;;;;;;;;;  alt+f2, 打开noenote  ;;;;;;;;;;;;;;;;
 
-!w::WinMyActiveOrOpen("ahk_exe WINWORD.EXE","Word") 	;;;;  alt+2  打开word
-
-!s::WinMyActiveOrOpenEx("ahk_exe cmd.exe","cmd", "C:\Windows\System32\cmd.exe")			;;;;;;;;;;;;;;  alt+s, 打开cmd  ;;;;;;;;;;;;;;;;
+!w::WinMyActiveOrOpen("ahk_exe ConEmu64.exe", "cmder") 	;;;;  alt+w  打开 cmder
 
 !+s::WinMyActiveOrOpen("ahk_exe powershell.exe","Windows PowerShell")		;;;;;;;;;;;;;; alt+shift+s,打开powershell窗口 ;;;;;;;;;;;;;;;;
 
-!E::WinMyActiveOrOpen("ahk_class CabinetWClass","my computer")	;;;;;;  alt+e打开资源管理器  ;;;;;;;;;;;;;;;;
+!E::WinMyActiveOrOpen("ahk_class CabinetWClass","my computer")	;;;;;;  alt+e 打开资源管理器  ;;;;;;;;;;;;;;;;
 
-!q::WinMyActiveOrOpen("ahk_class TablacusExplorer","Tablacus Explorer")	;;;;;;  alt+e打开资源管理器  ;;;;;;;;;;;;;;;;
+!q::WinMyActiveOrOpen("ahk_class TablacusExplorer","Tablacus Explorer")	;;;;;;  alt+e打 Tablacus Explorer  ;;;;;;;;;;;;;;;;
+
+!a::WinMyActiveOrOpen("ahk_exe YoudaoNote.exe", "有道云笔记")	;;;;;;  alt+a 打开 有道云笔记  ;;;;;;;;;;;;;;;;
+
+!s::WinMyActiveOrOpen("ahk_exe Typora.exe", "Typora")	;;;;;;  alt+s 打开 Typora  ;;;;;;;;;;;;;;;;
 
 CapsLock & f::WinMyActiveOrOpenEx("ahk_exe Everything.exe", "Everything", "C:\Program Files\Everything\Everything.exe") ; cap+F打开everything
 
@@ -68,7 +70,7 @@ CapsLock & f::WinMyActiveOrOpenEx("ahk_exe Everything.exe", "Everything", "C:\Pr
 
 
 
-;!a:: Run %A_Desktop%\shortcut\Sticky Notes	;;;;;;;;;;;;;;;;;;  alt+a, 打开Sticky Notes  ;;;;;;;;;;;;;;;;
+;!p:: Run %A_Desktop%\shortcut\Sticky Notes	;;;;;;;;;;;;;;;;;;  alt+p, 打开Sticky Notes. 这是打开微软商店应用的方法  ;;;;;;;;;;;;;;;;
 
 
 ;;;;; alt+x,在这种浏览器之间切换，360，qq，搜狗 ;;;;;;;;;;;;;;;;;;;;;;
@@ -400,21 +402,8 @@ else
 return
 
 
-;;;;;;;;;; cap+K 换成上， 
-^I::Send {Up}
-^+I::Send {ShiftDown}{Up}{ShiftUp}
 
-;;;;;;;;;; cap+i 换成下
-^+K::Send {ShiftDown}{Down}{ShiftUp}
-^K::Send {Down}
 
-;;;;;;;; cap+J 换成left
-^J::Send ^{Left}
-^+J::Send {ShiftDown}^{Left}{ShiftUp}
-
-;;;;;;; cap+L 换成right
-^L::Send ^{Right}
-^+L::Send {ShiftDown}^{Right}{ShiftUp}
 
 ;;;;;;;;;;;;;;;;;;;;; alt+z，在窗口最大化与缩小状态之间切换  ;;;;;;;;;;;;;;;;;;;;;   
 ; WinStatus:=0    
@@ -1043,7 +1032,7 @@ myWinActive(WinTitle)
 
 
 ;;;;; 程序未运行，就打开它，运行了，就激活窗口
-;用法示例： !f1::WinMyActiveOrOpen("ahk_exe notepad++.exe","Notepad++")， 其中Notepad++是位于桌面上的shortc文件夹下面的快捷方式名
+;用法示例： !f1::WinMyActiveOrOpen("ahk_exe notepad++.exe","Notepad++")， 其中Notepad++是位于桌面上的shortcut文件夹下面的快捷方式名
 WinMyActiveOrOpen(WinTitle,ExePath)
 {
 	IfWinExist %WinTitle%
