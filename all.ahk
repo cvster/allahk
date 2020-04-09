@@ -57,7 +57,7 @@ RecoginzeComputer()
 
 !q::WinMyActiveOrOpen("ahk_class TablacusExplorer","Tablacus Explorer")	;;;;;;  alt+e打开资源管理器  ;;;;;;;;;;;;;;;;
 
-CapsLock & f::WinMyActiveOrOpenEx("ahk_exe Everything.exe", "Everything", "C:\Program Files\Everything\Everything.exe") ; cap+F打开everything
+CapsLock & f::WinMyActiveOrOpenEx("ahk_exe Everything.exe", "搜索 Everything", "C:\Program Files (x86)\Everything\Everything.exe", "C:\Program Files\Everything\Everything.exe") ; cap+F打开everything
 
 !t:: Run control	;;;;;;;;; alt+t 打开控制面板
 
@@ -382,12 +382,13 @@ Return
 CapsLock & I::Send {Up}
 CapsLock & Left::
 CapsLock & J::
-if GetKeyState("Shift")
-    Send {ShiftDown}{Home}{ShiftUp}
+if GetKeyState("Shift")    
+	Send {ShiftDown}{Home}{ShiftUp}
 else
     Send {Home}
 return
 
+;;;;;;;;;; cap+K 换成下， 
 CapsLock & k::Send {Down}
 CapsLock & Right::
 CapsLock & L::
@@ -400,21 +401,21 @@ else
 return
 
 
-;;;;;;;;;; cap+K 换成上， 
-^I::Send {Up}
-^+I::Send {ShiftDown}{Up}{ShiftUp}
+; 上下左右
+; ^I::Send {Up}
+; ^+I::Send {ShiftDown}{Up}{ShiftUp}
 
-;;;;;;;;;; cap+i 换成下
-^+K::Send {ShiftDown}{Down}{ShiftUp}
-^K::Send {Down}
+; ;;;;;;;;;; cap+i 换成下
+; ^+K::Send {ShiftDown}{Down}{ShiftUp}
+; ^K::Send {Down}
 
-;;;;;;;; cap+J 换成left
-^J::Send ^{Left}
-^+J::Send {ShiftDown}^{Left}{ShiftUp}
+; ;;;;;;;; cap+J 换成left
+; ^J::Send ^{Left}
+; ^+J::Send {ShiftDown}^{Left}{ShiftUp}
 
-;;;;;;; cap+L 换成right
-^L::Send ^{Right}
-^+L::Send {ShiftDown}^{Right}{ShiftUp}
+; ;;;;;;; cap+L 换成right
+; ^L::Send ^{Right}
+; ^+L::Send {ShiftDown}^{Right}{ShiftUp}
 
 ;;;;;;;;;;;;;;;;;;;;; alt+z，在窗口最大化与缩小状态之间切换  ;;;;;;;;;;;;;;;;;;;;;   
 ; WinStatus:=0    
@@ -552,7 +553,8 @@ CapsLock & 5::
 		winIndex = 1
 	}
 		
-	WinMove, A, ,posBase_x ,posBase_y, 864, 509
+	WinMove, A, ,posBase_x ,posBase_y, 851, 509
+	; 851 不重要，多少都行。 851是通过window spy观察到的
 
 return
 
@@ -1044,15 +1046,15 @@ myWinActive(WinTitle)
 
 ;;;;; 程序未运行，就打开它，运行了，就激活窗口
 ;用法示例： !f1::WinMyActiveOrOpen("ahk_exe notepad++.exe","Notepad++")， 其中Notepad++是位于桌面上的shortc文件夹下面的快捷方式名
-WinMyActiveOrOpen(WinTitle,ExePath)
+WinMyActiveOrOpen(WinTitle, shortName)
 {
 	IfWinExist %WinTitle%
 	{
 		myWinActive(WinTitle)
 	}
 	else{
-		tooltip, 正在打开 %ExePath%
-		Run, %A_Desktop%\shortcut\%ExePath%,,UseErrorLevel
+		tooltip, 正在打开 %shortName%
+		Run, %A_Desktop%\shortcut\%shortName%,,UseErrorLevel
 		if(A_LastError != 0){
 			sleep 500
 			tooltip, "打开失败"
@@ -1068,15 +1070,18 @@ WinMyActiveOrOpen(WinTitle,ExePath)
 
 ;;;;; 程序未运行，就打开它，运行了，就激活窗口
 ;用法示例： WinMyActiveOrOpenEx("ahk_exe Everything.exe", "Everything", "C:\Program Files\Everything\Everything.exe")
-; WinTitle用于检测是否存在该窗口，tipName用于toolTip提示，exePath用于打开exe的路径，依次尝试exePath1、2、3
-WinMyActiveOrOpenEx(WinTitle, tipName="", exePath1="", exePath2="", exePath3=""){
+; WinTitle用于检测是否存在该窗口，shortName用于toolTip提示，exePath用于打开exe的路径，依次尝试exePath1、2、3
+WinMyActiveOrOpenEx(WinTitle, shortName="", exePath1="", exePath2="", exePath3=""){
 	IfWinExist %WinTitle%
 	{
 		myWinActive(WinTitle)
 	}
 	else{
-		tooltip, 正在打开%tipName%
-		Run, %exePath1%,,UseErrorLevel
+		tooltip, 正在打开%shortName%
+		Run, %A_Desktop%\shortcut\%shortName%,,UseErrorLevel
+		; Run, %exePath1%,,UseErrorLevel
+		if(A_LastError != 0)
+			Run, %exePath1%,,UseErrorLevel
 		if(A_LastError != 0)
 			Run, %exePath2%,,UseErrorLevel
 		if(A_LastError != 0)
