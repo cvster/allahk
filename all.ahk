@@ -47,15 +47,17 @@ RecoginzeComputer()
 
 !f2::WinMyActiveOrOpen("ahk_exe ONENOTE.EXE","OneNote")	;;;;;;;;;;;;;;;;;;  alt+f2, 打开noenote  ;;;;;;;;;;;;;;;;
 
-!w::WinMyActiveOrOpen("ahk_exe WINWORD.EXE","Word") 	;;;;  alt+2  打开word
-
-!s::WinMyActiveOrOpenEx("ahk_exe cmd.exe","cmd", "C:\Windows\System32\cmd.exe")			;;;;;;;;;;;;;;  alt+s, 打开cmd  ;;;;;;;;;;;;;;;;
+!w::WinMyActiveOrOpen("ahk_exe ConEmu64.exe", "cmder") 	;;;;  alt+w  打开 cmder
 
 !+s::WinMyActiveOrOpen("ahk_exe powershell.exe","Windows PowerShell")		;;;;;;;;;;;;;; alt+shift+s,打开powershell窗口 ;;;;;;;;;;;;;;;;
 
-!E::WinMyActiveOrOpen("ahk_class CabinetWClass","my computer")	;;;;;;  alt+e打开资源管理器  ;;;;;;;;;;;;;;;;
+!E::WinMyActiveOrOpen("ahk_class CabinetWClass","my computer")	;;;;;;  alt+e 打开资源管理器  ;;;;;;;;;;;;;;;;
 
-!q::WinMyActiveOrOpen("ahk_class TablacusExplorer","Tablacus Explorer")	;;;;;;  alt+e打开资源管理器  ;;;;;;;;;;;;;;;;
+!q::WinMyActiveOrOpen("ahk_class TablacusExplorer","Tablacus Explorer")	;;;;;;  alt+e打 Tablacus Explorer  ;;;;;;;;;;;;;;;;
+
+!a::WinMyActiveOrOpen("ahk_exe YoudaoNote.exe", "有道云笔记")	;;;;;;  alt+a 打开 有道云笔记  ;;;;;;;;;;;;;;;;
+
+!s::WinMyActiveOrOpen("ahk_exe Typora.exe", "Typora")	;;;;;;  alt+s 打开 Typora  ;;;;;;;;;;;;;;;;
 
 CapsLock & f::WinMyActiveOrOpenEx("ahk_exe Everything.exe", "搜索 Everything", "C:\Program Files (x86)\Everything\Everything.exe", "C:\Program Files\Everything\Everything.exe") ; cap+F打开everything
 
@@ -68,7 +70,7 @@ CapsLock & f::WinMyActiveOrOpenEx("ahk_exe Everything.exe", "搜索 Everything",
 
 
 
-;!a:: Run %A_Desktop%\shortcut\Sticky Notes	;;;;;;;;;;;;;;;;;;  alt+a, 打开Sticky Notes  ;;;;;;;;;;;;;;;;
+;!p:: Run %A_Desktop%\shortcut\Sticky Notes	;;;;;;;;;;;;;;;;;;  alt+p, 打开Sticky Notes. 这是打开微软商店应用的方法  ;;;;;;;;;;;;;;;;
 
 
 ;;;;; alt+x,在这种浏览器之间切换，360，qq，搜狗 ;;;;;;;;;;;;;;;;;;;;;;
@@ -388,6 +390,8 @@ else
     Send {Home}
 return
 
+
+; 上下左右
 ;;;;;;;;;; cap+K 换成下， 
 CapsLock & k::Send {Down}
 CapsLock & Right::
@@ -401,21 +405,7 @@ else
 return
 
 
-; 上下左右
-; ^I::Send {Up}
-; ^+I::Send {ShiftDown}{Up}{ShiftUp}
 
-; ;;;;;;;;;; cap+i 换成下
-; ^+K::Send {ShiftDown}{Down}{ShiftUp}
-; ^K::Send {Down}
-
-; ;;;;;;;; cap+J 换成left
-; ^J::Send ^{Left}
-; ^+J::Send {ShiftDown}^{Left}{ShiftUp}
-
-; ;;;;;;; cap+L 换成right
-; ^L::Send ^{Right}
-; ^+L::Send {ShiftDown}^{Right}{ShiftUp}
 
 ;;;;;;;;;;;;;;;;;;;;; alt+z，在窗口最大化与缩小状态之间切换  ;;;;;;;;;;;;;;;;;;;;;   
 ; WinStatus:=0    
@@ -1207,3 +1197,24 @@ GroupShow(WinTitle)
 	WinShow, ahk_group ShowGroupTmp
 	DetectHiddenWindows, Off
 }
+
+
+; 代码回收
+
+
+
+; Ctrl版的上下左右，不好使，因为按键的时候会有奇怪的粘滞感，经常输入错误。
+	; ^I::Send {Up}
+	; ^+I::Send {ShiftDown}{Up}{ShiftUp}
+
+	; ;;;;;;;;;; cap+i 换成下
+	; ^+K::Send {ShiftDown}{Down}{ShiftUp}
+	; ^K::Send {Down}
+
+	; ;;;;;;;; cap+J 换成left
+	; ^J::Send ^{Left}
+	; ^+J::Send {ShiftDown}^{Left}{ShiftUp}
+
+	; ;;;;;;; cap+L 换成right
+	; ^L::Send ^{Right}
+	; ^+L::Send {ShiftDown}^{Right}{ShiftUp}
