@@ -1201,8 +1201,6 @@ GroupShow(WinTitle)
 
 ; 代码回收
 
-
-
 ; Ctrl版的上下左右，不好使，因为按键的时候会有奇怪的粘滞感，经常输入错误。
 	; ^I::Send {Up}
 	; ^+I::Send {ShiftDown}{Up}{ShiftUp}
@@ -1218,3 +1216,29 @@ GroupShow(WinTitle)
 	; ;;;;;;; cap+L 换成right
 	; ^L::Send ^{Right}
 	; ^+L::Send {ShiftDown}^{Right}{ShiftUp}
+
+; 挂起梦幻西游的所有进程（挂起之后会提示网络断开，需要重新扫码登录）
+    ; tooltip, 正在挂起进程，请等待约3秒
+    ; for process in ComObjGet("winmgmts:").ExecQuery("Select * from Win32_Process")
+    ; {
+    ;     tooltip,
+    ;     if(process.Name="mymain.exe" or process.Name="飓风梦幻西游web助手.exe" or process.Name="SSKMH.exe")
+    ;     {
+    ;         thisPID := process.handle
+    ;         run, pssuspend %thisPID%
+    ;     }
+    ; }
+
+	; ; 解挂进程（没生效，不知道为啥）
+    ; tooltip, 正在解挂进程，请等待约3秒
+    ; for process in ComObjGet("winmgmts:").ExecQuery("Select * from Win32_Process")
+    ; {
+    ;     tooltip,
+    ;     if(process.Name="mymain.exe" or process.Name="飓风梦幻西游web助手.exe" or process.Name="SSKMH.exe")
+    ;     {
+    ;         thisPID := process.handle
+    ;         run, % "pssuspend -r "+thisPID
+    ;     }
+    ; }
+
+
