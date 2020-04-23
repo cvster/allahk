@@ -51,7 +51,7 @@ RecoginzeComputer()
 
 !+s::WinMyActiveOrOpen("ahk_exe powershell.exe","Windows PowerShell")		;;;;;;;;;;;;;; alt+shift+s,打开powershell窗口 ;;;;;;;;;;;;;;;;
 
-!E::WinMyActiveOrOpen("ahk_class CabinetWClass","my computer")	;;;;;;  alt+e 打开资源管理器  ;;;;;;;;;;;;;;;;
+!E::WinMyActiveOrOpen("ahk_class CabinetWClass","explorer.exe")	;;;;;;  alt+e 打开资源管理器  ;;;;;;;;;;;;;;;;
 
 !q::WinMyActiveOrOpen("ahk_class TablacusExplorer","Tablacus Explorer")	;;;;;;  alt+e打 Tablacus Explorer  ;;;;;;;;;;;;;;;;
 
@@ -59,7 +59,7 @@ RecoginzeComputer()
 
 !s::WinMyActiveOrOpen("ahk_exe Typora.exe", "Typora")	;;;;;;  alt+s 打开 Typora  ;;;;;;;;;;;;;;;;
 
-CapsLock & f::WinMyActiveOrOpenEx("ahk_exe Everything.exe", "搜索 Everything", "C:\Program Files (x86)\Everything\Everything.exe", "C:\Program Files\Everything\Everything.exe") ; cap+F打开everything
+CapsLock & f::WinMyActiveOrOpen("ahk_exe Everything.exe", "搜索 Everything", "C:\Program Files (x86)\Everything\Everything.exe", "C:\Program Files\Everything\Everything.exe") ; cap+F打开everything
 
 !t:: Run control	;;;;;;;;; alt+t 打开控制面板
 
@@ -1034,34 +1034,34 @@ myWinActive(WinTitle)
 
 
 
-;;;;; 程序未运行，就打开它，运行了，就激活窗口
-;用法示例： !f1::WinMyActiveOrOpen("ahk_exe notepad++.exe","Notepad++")， 其中Notepad++是位于桌面上的shortc文件夹下面的快捷方式名
-WinMyActiveOrOpen(WinTitle, shortName)
-{
-	IfWinExist %WinTitle%
-	{
-		myWinActive(WinTitle)
-	}
-	else{
-		tooltip, 正在打开 %shortName%
-		Run, %A_Desktop%\shortcut\%shortName%,,UseErrorLevel
-		if(A_LastError != 0){
-			sleep 500
-			tooltip, "打开失败"
-			sleep 1000
-			tooltip,
-		}
-		sleep 1000
-		tooltip,
-	}
+; ;;;;; 程序未运行，就打开它，运行了，就激活窗口
+; ;用法示例： !f1::WinMyActiveOrOpen("ahk_exe notepad++.exe","Notepad++")， 其中Notepad++是位于桌面上的shortc文件夹下面的快捷方式名
+; WinMyActiveOrOpen(WinTitle, shortName)
+; {
+; 	IfWinExist %WinTitle%
+; 	{
+; 		myWinActive(WinTitle)
+; 	}
+; 	else{
+; 		tooltip, 正在打开 %shortName%
+; 		Run, %A_Desktop%\shortcut\%shortName%,,UseErrorLevel
+; 		if(A_LastError != 0){
+; 			sleep 500
+; 			tooltip, "打开失败"
+; 			sleep 1000
+; 			tooltip,
+; 		}
+; 		sleep 1000
+; 		tooltip,
+; 	}
 		
-}
+; }
 
 
 ;;;;; 程序未运行，就打开它，运行了，就激活窗口
-;用法示例： WinMyActiveOrOpenEx("ahk_exe Everything.exe", "Everything", "C:\Program Files\Everything\Everything.exe")
+;用法示例： WinMyActiveOrOpen("ahk_exe Everything.exe", "Everything", "C:\Program Files\Everything\Everything.exe")
 ; WinTitle用于检测是否存在该窗口，shortName用于toolTip提示，exePath用于打开exe的路径，依次尝试exePath1、2、3
-WinMyActiveOrOpenEx(WinTitle, shortName="", exePath1="", exePath2="", exePath3=""){
+WinMyActiveOrOpen(WinTitle, shortName="", exePath1="", exePath2="", exePath3=""){
 	IfWinExist %WinTitle%
 	{
 		myWinActive(WinTitle)
@@ -1069,14 +1069,16 @@ WinMyActiveOrOpenEx(WinTitle, shortName="", exePath1="", exePath2="", exePath3="
 	else{
 		tooltip, 正在打开%shortName%
 		Run, %A_Desktop%\shortcut\%shortName%,,UseErrorLevel
-		; Run, %exePath1%,,UseErrorLevel
+		if(A_LastError != 0)
+			Run, %shortName%,,UseErrorLevel
 		if(A_LastError != 0)
 			Run, %exePath1%,,UseErrorLevel
 		if(A_LastError != 0)
 			Run, %exePath2%,,UseErrorLevel
 		if(A_LastError != 0)
 			Run, %exePath3%,,UseErrorLevel
-		if(A_LastError != 0){
+		if(A_LastError != 0)
+		{
 			sleep 600
 			tooltip, "打开失败"
 		}
@@ -1201,8 +1203,6 @@ GroupShow(WinTitle)
 
 ; 代码回收
 
-
-
 ; Ctrl版的上下左右，不好使，因为按键的时候会有奇怪的粘滞感，经常输入错误。
 	; ^I::Send {Up}
 	; ^+I::Send {ShiftDown}{Up}{ShiftUp}
@@ -1218,3 +1218,29 @@ GroupShow(WinTitle)
 	; ;;;;;;; cap+L 换成right
 	; ^L::Send ^{Right}
 	; ^+L::Send {ShiftDown}^{Right}{ShiftUp}
+
+; 挂起梦幻西游的所有进程（挂起之后会提示网络断开，需要重新扫码登录）
+    ; tooltip, 正在挂起进程，请等待约3秒
+    ; for process in ComObjGet("winmgmts:").ExecQuery("Select * from Win32_Process")
+    ; {
+    ;     tooltip,
+    ;     if(process.Name="mymain.exe" or process.Name="飓风梦幻西游web助手.exe" or process.Name="SSKMH.exe")
+    ;     {
+    ;         thisPID := process.handle
+    ;         run, pssuspend %thisPID%
+    ;     }
+    ; }
+
+	; ; 解挂进程（没生效，不知道为啥）
+    ; tooltip, 正在解挂进程，请等待约3秒
+    ; for process in ComObjGet("winmgmts:").ExecQuery("Select * from Win32_Process")
+    ; {
+    ;     tooltip,
+    ;     if(process.Name="mymain.exe" or process.Name="飓风梦幻西游web助手.exe" or process.Name="SSKMH.exe")
+    ;     {
+    ;         thisPID := process.handle
+    ;         run, % "pssuspend -r "+thisPID
+    ;     }
+    ; }
+
+
