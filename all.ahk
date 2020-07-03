@@ -971,27 +971,27 @@ RecoginzeComputer()
 		WorkingPath=D:\1-working
 		pcName=SIMU
 		pcOS=win7
-		MsgBox Load Successful,   SIMU, win7.
+		; MsgBox Load Successful,   SIMU, win7.
 	}
 	if FileExist("C:\Users\JiuChong")	;;;JiuChong
 	{
 		WorkingPath=D:\OneDrive - business\1-working
 		pcName=JiuChong
 		pcOS=win10
-		MsgBox Load Successful,   JiuChong, win10.
+		; MsgBox Load Successful,   JiuChong, win10.
 	}
 	if FileExist("C:\Users\myAcer")	;;;myAcer
 	{
 		WorkingPath=\\jiuchong\OneDrive - business\1-working
 		pcName=myAcer
 		pcOS=win10
-		MsgBox Load Successful,   myAcer, win10.
+		; MsgBox Load Successful,   myAcer, win10.
 	}
 	if FileExist("C:\Users\ps4800")	;;;ps4800
 	{
 		pcName=ps4800
 		pcOS=win10
-		MsgBox Load Successful,   ps4800, win10.
+		; MsgBox Load Successful,   ps4800, win10.
 	}
 	
 }
