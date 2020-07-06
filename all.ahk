@@ -213,7 +213,7 @@ CapsLock & 3::
 }
 return
 
-; cap+4, 将cap+3挂起的写入3.txt中的pid全部恢复，并清空1.txt
+; cap+4, 将cap+3挂起的写入3.txt中的pid全部恢复，并清空3.txt
 CapsLock & 4::
 Loop, read, context\3.txt
 {
@@ -513,6 +513,26 @@ HideSomeWindows()
 CapsLock & t::
 
 return
+
+
+; ; 隐藏阴阳师的所有窗口
+; CapsLock & 6::
+; 	Loop, 10
+; 	{
+; 		WinHide, 阴阳师-网易游戏
+; 	}
+; return
+; 
+; 
+; ; 显示阴阳师的所有窗口
+; CapsLock & 7::
+; 	Loop, 10
+; 	{
+; 		; SetTitleMatchMode, 2	;;;;窗口名称匹配模式为2，包含即可
+; 		WinShow 阴阳师-网易游戏
+; 	}
+; return
+
 
 
 ; 阴阳师 4个窗口， 排成两行。 最好登录之后再用，登录之前的窗口有很多奇怪的小窗口。
