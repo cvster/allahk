@@ -41,9 +41,7 @@ RecoginzeComputer()
 
 !1::WinMyActiveOrOpen("ahk_exe Code.exe","Visual Studio Code")		;;;;;;;;;;;;;;;;;;;;;;;  alt+1, 打开vsCode  ;;;;;;;;;;;;;;;;
 
-!2::WinMyActiveOrOpen("ahk_exe notepad++.exe","Notepad++")		;;;;;;;;;;;;;;  alt+2, 打开 notpad++ ;;;;;;;;;;;;;;;;	
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;         ;;;;;;;;;;;;;;  alt+3,打开vs，在下面
+!2::WinMyActiveOrOpen("ahk_exe devenv.exe","Visual Studio")	;;;;;;;;;;;;;;;;;;  alt+2,打开vs
 
 !f2::WinMyActiveOrOpen("ahk_exe ONENOTE.EXE","OneNote")	;;;;;;;;;;;;;;;;;;  alt+f2, 打开noenote  ;;;;;;;;;;;;;;;;
 
@@ -80,13 +78,6 @@ CapsLock & f::WinMyActiveOrOpen("ahk_exe Everything.exe", "搜索 Everything", "
 return
 
 
-;;;;;;;;;;;;;;;;;;  alt+3,如果有ps就打开ps，没有打开vs2010/2017  ;;;;;;;;;;;;;;;;
-!3::
-ifWinExist ahk_exe phpstorm64.exe
-	myWinActive("ahk_exe phpstorm64.exe")
-else
-	myWinActive("ahk_exe devenv.exe")	
-return
 
 
 
@@ -972,21 +963,11 @@ return
 
 ::53qq::535674963@qq.com
 
-::aulo::autologonuser
-
-::Colu::Columbia03
-
 ::1307::13071806202
 
 ::gao7::gao725224
 
 ::Gao7::Gao725224
-
-::xls2::xls211@officework.top
-
-::adco::adcorp.kla-tencor.com\liugao
-
-::liu.::liu.gao@kla-tencor.com
 
 ::4113::411323199303135850
 
