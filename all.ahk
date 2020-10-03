@@ -1097,6 +1097,7 @@ AddBrowserGroup()
 	GroupAdd, BrowserGroup, ahk_class SE_SogouExplorerFrame
 	GroupAdd, BrowserGroup, ahk_class QQBrowser_WidgetWin_1
 	GroupAdd, BrowserGroup, ahk_exe UCBrowser.exe
+	GroupAdd, BrowserGroup, ahk_exe chrome.exe
 }
 
 ActiveOfficeGroup()
