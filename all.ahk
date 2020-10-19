@@ -4,19 +4,11 @@
 #SingleInstance force	;; only one running ahk instance
 SetTitleMatchMode,3		;;窗口名称匹配模式, 3完全相同, 2包含即可, 1以它开头
 TablacusSpace=0
-TVHideTimely300msOn = 1		;隐藏TV
 winIndex=1
 
 ;;;;;;;  周期性地按键，保持屏幕唤醒,防止休眠或睡眠 ;;;;;;;;
 #Persistent
 SetTimer, Timely5min, 300000	;5分钟
-
-; #Persistent
-;SetTimer, Timely30s, 30000	;30s
-
-#Persistent
-SetTimer, TVHideTimely300ms, 300	;300ms
-
 
 
 
@@ -70,11 +62,11 @@ CapsLock & f::WinMyActiveOrOpen("ahk_exe Everything.exe", "搜索 Everything", "
 
 
 ;;;;; alt+x,在这种浏览器之间切换，360，qq，搜狗 ;;;;;;;;;;;;;;;;;;;;;;
-
-
 AddBrowserGroup()
 {
 	global
+	GroupAdd, BrowserGroup, ahk_exe liebao.exe
+	GroupAdd, BrowserGroup, ahk_exe chrome.exe
 	GroupAdd, BrowserGroup, ahk_class 360se6_Frame
 	GroupAdd, BrowserGroup, ahk_class SE_SogouExplorerFrame
 	GroupAdd, BrowserGroup, ahk_class QQBrowser_WidgetWin_1
@@ -382,7 +374,7 @@ CapsLock & LButton::Send !{Left}
 
 CapsLock & MButton::
 ControlSend, SysListView322, !{Up}, ahk_exe Q-Dir.exe
-Return
+return
 ;{Click}+
 #IfWinActive
 
@@ -457,7 +449,6 @@ SwitchToSimilarWindow()
 ;;; ctrl+cap, 切换， 远程桌面，Ericom 和本机outlook之间循环切换
 #UseHook, On	;这个对Ericom有用
 ctrl & CapsLock::
-HideSomeWindows()
 if(pcName = "KLA-laptop")	;远程电脑上的ahk忽略该命令，防止重复响应
 {
 	SetTitleMatchMode, 2	;窗口名称匹配模式，包含
@@ -491,33 +482,6 @@ return
 
 
 
-
-HideSomeWindows()
-{
-    global
-	TVHideTimely300msOn = 1
-	AddHideGroup()
-	WinHide, ahk_group HideGroup
-
-	SetTitleMatchMode, 2	;;;;窗口名称匹配模式为2，包含即可
-	
-	;;可能有多个窗口，因此循环多次。
-	Loop, 5
-	{
-		WinHide, ahk_exe qiyu.exe
-		WinHide, ahk_exe wechatdevtools.exe
-		WinHide, ahk_exe TeamViewer.exe
-		WinHide, ahk_class WeChatMainWndForPC
-		WinHide, ahk_class ImagePreviewWnd
-		WinHide, ahk_exe WeChat.exe
-	}
-
-	IfWinActive ahk_class OrayUI
-		WinMinimize
-	else
-		GroupHide("ahk_class OrayUI")
-
-}
 
 ;;;;;;;;;;;;;;;;;;;; cap+t,测试 ;;;;;;;;;
 
@@ -580,51 +544,33 @@ CapsLock & 5::
 return
 
 
-; 显示这组隐藏的窗口
-^!Space::
-	TVHideTimely300msOn = 0
+
+
+
+; 隐藏一组窗口，包括阴阳师等
+!Space::
 	AddHideGroup()
-	WinShow, ahk_group HideGroup
-
-	; WinHide, 主机登录JIUCHONG 向日葵控制端    ahk_class OrayUI
-	SetTitleMatchMode, 2	;;;;窗口名称匹配模式为2，包含即可
-	ifWinExist 桌面控制
-	{
-		WinActivate
-		return
-	}
-		
-	; winid := FindWinExeTitle("SunloginRemote.exe","桌面控制")
-	ifWinExist ahk_class OrayUI
-		WinActivate
-	else
-	{
-		GroupShow("ahk_class OrayUI")
-
-		SetTitleMatchMode, 2	;;;;窗口名称匹配模式为2，包含即可
-		WinHide 主机登录
-		WinHide 桌面控制
-		WinHide 向日葵控制端
-		WinHide 向日葵控制端
-		WinHide 向日葵客户端
-		WinActivate ahk_class OrayUI
-
-		; winid := FindWinExeTitle("SunloginRemote.exe","桌面控制")
-		; WinShow ahk_id %winid%
-		; WinActivate ahk_id %winid%
-	}
+	HideSomeWindows()
+	WinHide, ahk_exe onmyoji.exe
 return
 
+; 显示这组隐藏的窗口
+^!Space::
+	AddHideGroup()
+	WinShow, ahk_group HideGroup
+return
+
+HideSomeWindows()
+{
+    global
+	AddHideGroup()
+	WinHide, ahk_group HideGroup
+}
 
 AddHideGroup()
 {
 	SetTitleMatchMode, 2	;;;;窗口名称匹配模式为2，包含即可
-	GroupAdd, HideGroup, ahk_class SE_SogouExplorerFrame	;搜狗浏览器
-	GroupAdd, HideGroup, ahk_class 8F4F6F8A486E239185F2559303091457
-	
-	AddHideGroupContainMode("wechatdevtools.exe","微信开发者工具")
-	AddHideGroupContainMode("phpstorm64.exe","PhpStorm")
-	
+	AddHideGroupContainMode("onmyoji.exe", "阴阳师-网易游戏")
 	SetTitleMatchMode, 3	;;;;窗口名称匹配模式为3, 完全匹配
 }
 
@@ -1145,23 +1091,6 @@ WinHide
 return
 
 
-;; 隐藏TV
-TVHideTimely300ms:
-if(pcName != "KLA-laptop")
-	return
-if TVHideTimely300msOn=0
-	return
-SetTitleMatchMode,3
-ifWinExist ahk_exe TeamViewer.exe
-{
-	WinHide
-}
-;ifWinExist ahk_class OrayUI
-;	WinHide
-
-ifWinExist Session timeout!
-WinHide
-return
 
 
 
@@ -1178,6 +1107,8 @@ WinGetTitle, title, ahk_id %id%
 WinGetClass, class, ahk_id %id%
 ToolTip, ahk_id %id%`nahk_class %class%`n%title%`nControl: %control%
 return
+
+
 
 
 ActiveOfficeGroup()
