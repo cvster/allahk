@@ -57,9 +57,6 @@ CapsLock & f::WinMyActiveOrOpen("ahk_exe Everything.exe", "搜索 Everything", "
 
 
 
-
-
-
 ;!p:: Run %A_Desktop%\shortcut\Sticky Notes	;;;;;;;;;;;;;;;;;;  alt+p, 打开Sticky Notes. 这是打开微软商店应用的方法  ;;;;;;;;;;;;;;;;
 
 
@@ -70,6 +67,9 @@ CapsLock & f::WinMyActiveOrOpen("ahk_exe Everything.exe", "搜索 Everything", "
 return
 
 
+;;; f7鼠标左键，f8鼠标右键
+F8::Send {LButton}
+F9::Send {RButton}
 
 
 
@@ -104,13 +104,6 @@ return
 
 
 
-
-;;;;; 需要以管理员身份运行脚本 ;;;
-#IfWinActive ahk_exe mymain.exe
-MButton::
-WinActivateBottom 梦幻西游手游
-return
-#IfWinActive
 
 
 /*
@@ -232,35 +225,35 @@ return
 
 
 
-;; cap+m 挂起所有yx窗口 ;;
-CapsLock & m::
-if GetKeyState("Shift")
-{
-	tooltip, 正在解挂进程，请等待约3秒
-	for process in ComObjGet("winmgmts:").ExecQuery("Select * from Win32_Process")
-	{
-		tooltip,
-		if(process.Name="mymain.exe" or process.Name="飓风梦幻西游web助手.exe" or process.Name="SSKMH.exe")
-		{
-			thisPID := process.handle
-			run, % "pssuspend -r "+thisPID
-		}
-	}
-}
-else
-{
-	tooltip, 正在挂起进程，请等待约3秒
-	for process in ComObjGet("winmgmts:").ExecQuery("Select * from Win32_Process")
-	{
-		tooltip,
-		if(process.Name="mymain.exe" or process.Name="飓风梦幻西游web助手.exe" or process.Name="SSKMH.exe")
-		{
-			thisPID := process.handle
-			run, pssuspend %thisPID%
-		}
-	}
-}
-return
+; ;; cap+m 挂起所有yx窗口 ;;
+; CapsLock & m::
+; if GetKeyState("Shift")
+; {
+; 	tooltip, 正在解挂进程，请等待约3秒
+; 	for process in ComObjGet("winmgmts:").ExecQuery("Select * from Win32_Process")
+; 	{
+; 		tooltip,
+; 		if(process.Name="mymain.exe" or process.Name="飓风梦幻西游web助手.exe" or process.Name="SSKMH.exe")
+; 		{
+; 			thisPID := process.handle
+; 			run, % "pssuspend -r "+thisPID
+; 		}
+; 	}
+; }
+; else
+; {
+; 	tooltip, 正在挂起进程，请等待约3秒
+; 	for process in ComObjGet("winmgmts:").ExecQuery("Select * from Win32_Process")
+; 	{
+; 		tooltip,
+; 		if(process.Name="mymain.exe" or process.Name="飓风梦幻西游web助手.exe" or process.Name="SSKMH.exe")
+; 		{
+; 			thisPID := process.handle
+; 			run, pssuspend %thisPID%
+; 		}
+; 	}
+; }
+; return
 
 
 
