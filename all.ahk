@@ -37,8 +37,6 @@ RecoginzeComputer()
 
 !f2::WinMyActiveOrOpen("ahk_exe ONENOTE.EXE","OneNote")	;;;;;;;;;;;;;;;;;;  alt+f2, 打开noenote  ;;;;;;;;;;;;;;;;
 
-!w::WinMyActiveOrOpen("ahk_exe ConEmu64.exe", "cmder") 	;;;;  alt+w  打开 cmder
-
 !+s::WinMyActiveOrOpen("ahk_exe powershell.exe","Windows PowerShell")		;;;;;;;;;;;;;; alt+shift+s,打开powershell窗口 ;;;;;;;;;;;;;;;;
 
 !E::WinMyActiveOrOpen("ahk_class CabinetWClass","explorer.exe")	;;;;;;  alt+e 打开资源管理器  ;;;;;;;;;;;;;;;;
@@ -61,18 +59,41 @@ CapsLock & f::WinMyActiveOrOpen("ahk_exe Everything.exe", "搜索 Everything", "
 
 
 ;;;;; alt+x,在这种浏览器之间切换，360，qq，搜狗 ;;;;;;;;;;;;;;;;;;;;;;
+AddBrowserGroup()
+{
+	global
+	GroupAdd, BrowserGroup, ahk_exe liebao.exe
+	GroupAdd, BrowserGroup, ahk_exe chrome.exe
+	GroupAdd, BrowserGroup, ahk_class 360se6_Frame
+	GroupAdd, BrowserGroup, ahk_class SE_SogouExplorerFrame
+	GroupAdd, BrowserGroup, ahk_class QQBrowser_WidgetWin_1
+	GroupAdd, BrowserGroup, ahk_exe UCBrowser.exe
+}
 !x::
 	AddBrowserGroup()
 	GroupActivate, BrowserGroup
 return
 
 
+;;;;  alt+w  打开 cmder, git bash, Terminus 
+AddCmdGroup()
+{
+	global
+	GroupAdd, CmdGroup, ahk_exe mintty.exe
+	GroupAdd, CmdGroup, ahk_exe ConEmu64.exe
+	GroupAdd, CmdGroup, ahk_exe Terminus.exe
+}
+!w::
+	AddCmdGroup()
+	GroupActivate, CmdGroup
+	; WinMyActiveOrOpen("ahk_exe ConEmu64.exe", "cmder") 	
+return
+
+
+
 ;;; f7鼠标左键，f8鼠标右键
 F8::Send {LButton}
 F9::Send {RButton}
-
-
-
 
 
 
@@ -1082,15 +1103,7 @@ ToolTip, ahk_id %id%`nahk_class %class%`n%title%`nControl: %control%
 return
 
 
-AddBrowserGroup()
-{
-	global
-	GroupAdd, BrowserGroup, ahk_exe liebao.exe
-	GroupAdd, BrowserGroup, ahk_class 360se6_Frame
-	GroupAdd, BrowserGroup, ahk_class SE_SogouExplorerFrame
-	GroupAdd, BrowserGroup, ahk_class QQBrowser_WidgetWin_1
-	GroupAdd, BrowserGroup, ahk_exe UCBrowser.exe
-}
+
 
 ActiveOfficeGroup()
 {
