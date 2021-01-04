@@ -49,10 +49,9 @@ RecoginzeComputer()
 
 CapsLock & f::WinMyActiveOrOpen("ahk_exe Everything.exe", "搜索 Everything", "C:\Program Files (x86)\Everything\Everything.exe", "C:\Program Files\Everything\Everything.exe") ; cap+F打开everything
 
-!t:: Run control	;;;;;;;;; alt+t 打开控制面板
-
-
-
+; !t:: Run control	;;;;;;;;; alt+t 打开控制面板
+; !t::send %A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%:%A_Sec%
+!t::send %A_YYYY%-%A_MM%-%A_DD%
 
 
 ;!p:: Run %A_Desktop%\shortcut\Sticky Notes	;;;;;;;;;;;;;;;;;;  alt+p, 打开Sticky Notes. 这是打开微软商店应用的方法  ;;;;;;;;;;;;;;;;
