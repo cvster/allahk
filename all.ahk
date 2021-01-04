@@ -45,7 +45,8 @@ RecoginzeComputer()
 
 !a::WinMyActiveOrOpen("ahk_exe YoudaoNote.exe", "有道云笔记")	;;;;;;  alt+a 打开 有道云笔记  ;;;;;;;;;;;;;;;;
 
-!s::WinMyActiveOrOpen("ahk_exe Typora.exe", "Typora")	;;;;;;  alt+s 打开 Typora  ;;;;;;;;;;;;;;;;
+; !s::WinMyActiveOrOpen("ahk_exe Typora.exe", "Typora")	;;;;;;  alt+s 打开 Typora  ;;;;;;;;;;;;;;;;
+!s:: send #1
 
 CapsLock & f::WinMyActiveOrOpen("ahk_exe Everything.exe", "搜索 Everything", "C:\Program Files (x86)\Everything\Everything.exe", "C:\Program Files\Everything\Everything.exe") ; cap+F打开everything
 
