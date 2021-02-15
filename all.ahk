@@ -50,8 +50,9 @@ RecoginzeComputer()
 
 CapsLock & f::WinMyActiveOrOpen("ahk_exe Everything.exe", "搜索 Everything", "C:\Program Files (x86)\Everything\Everything.exe", "C:\Program Files\Everything\Everything.exe") ; cap+F打开everything
 
-; !t:: Run control	;;;;;;;;; alt+t 打开控制面板
-; !t::send %A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%:%A_Sec%
+; !t:: Run control	;;;;;;;;; 打开控制面板
+
+; alt+t, 输入日期。 如果想输入时分秒，可以这样：  %A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%:%A_Sec%
 !t::send %A_YYYY%-%A_MM%-%A_DD%
 
 
